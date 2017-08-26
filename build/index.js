@@ -17,8 +17,8 @@ class Card extends React.Component {
     return React.createElement(
       "div",
       { className: "card" },
-      React.createElement(Photo, null),
-      React.createElement(Bio, null),
+      React.createElement(Photo, { source: "./img/vk.png" }),
+      React.createElement(Bio, { name: "Vitalii Kulyk", location: "Klaipeda", occupation: "Save freedom!" }),
       React.createElement(Updates, null)
     );
   }
@@ -29,7 +29,7 @@ class Photo extends React.Component {
     return React.createElement(
       "div",
       { className: "photo" },
-      React.createElement("img", { src: "img/vk.png", alt: "Photo" })
+      React.createElement("img", { src: this.props.source, alt: "Photo" })
     );
   }
 }
@@ -42,12 +42,12 @@ class Bio extends React.Component {
       React.createElement(
         "h1",
         { className: "name" },
-        "Name"
+        this.props.name
       ),
       React.createElement(
         "h2",
         { className: "location" },
-        "Location"
+        this.props.location
       ),
       React.createElement(
         "div",
@@ -55,7 +55,7 @@ class Bio extends React.Component {
         React.createElement(
           "p",
           null,
-          "Protecting freedom"
+          this.props.occupation
         )
       )
     );
