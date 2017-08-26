@@ -1,6 +1,6 @@
 var person = {
   name: "Vitalii Kulyk",
-  location: "Palanga, Lithuania",
+  location: "Vilnus, Lithuania",
   ocupation: {
     title: "Travelling",
     employer: "Have fun"
@@ -20,9 +20,13 @@ class Card extends React.Component {
   render() {
     return (
       <div className="card">
-        <Photo source={"./img/vk.png"}/>
-        <Bio name={"Vitalii Kulyk"} location={"Klaipeda"} occupation={"Save freedom!"}/>
-        <Updates />
+        <Photo source={person.photo} />
+        <Bio
+          name={person.name}
+          location={person.location}
+          occupation={person.occupation}
+        />
+        <Updates updates={person.updates} />
       </div>
     );
   }
@@ -42,10 +46,16 @@ class Bio extends React.Component {
   render() {
     return (
       <div className="bio">
-        <h1 className="name">{this.props.name}</h1>
-        <h2 className="location">{this.props.location}</h2>
+        <h1 className="name">
+          {this.props.name}
+        </h1>
+        <h2 className="location">
+          {this.props.location}
+        </h2>
         <div className="occupation">
-          <p>{this.props.occupation}</p>
+          <p>
+            {this.props.occupation}
+          </p>
         </div>
       </div>
     );
@@ -53,12 +63,17 @@ class Bio extends React.Component {
 }
 
 class Updates extends React.Component {
+  updates() {
+    return this.props.updates.map(function(update, index) {
+      return (<li className={"update " + update.platform} key={index}>{update.status}</li>)
+    });
+  }
+
   render() {
     return (
       <div className="updates">
         <ul>
-          <li className="update">Updates</li>
-          <li className="update">Updates</li>
+          {this.updates()}
         </ul>
       </div>
     );

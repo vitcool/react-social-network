@@ -1,6 +1,6 @@
 var person = {
   name: "Vitalii Kulyk",
-  location: "Palanga, Lithuania",
+  location: "Vilnus, Lithuania",
   ocupation: {
     title: "Travelling",
     employer: "Have fun"
@@ -17,9 +17,13 @@ class Card extends React.Component {
     return React.createElement(
       "div",
       { className: "card" },
-      React.createElement(Photo, { source: "./img/vk.png" }),
-      React.createElement(Bio, { name: "Vitalii Kulyk", location: "Klaipeda", occupation: "Save freedom!" }),
-      React.createElement(Updates, null)
+      React.createElement(Photo, { source: person.photo }),
+      React.createElement(Bio, {
+        name: person.name,
+        location: person.location,
+        occupation: person.occupation
+      }),
+      React.createElement(Updates, { updates: person.updates })
     );
   }
 }
@@ -63,6 +67,16 @@ class Bio extends React.Component {
 }
 
 class Updates extends React.Component {
+  updates() {
+    return this.props.updates.map(function (update, index) {
+      return React.createElement(
+        "li",
+        { className: "update " + update.platform, key: index },
+        update.status
+      );
+    });
+  }
+
   render() {
     return React.createElement(
       "div",
@@ -70,16 +84,7 @@ class Updates extends React.Component {
       React.createElement(
         "ul",
         null,
-        React.createElement(
-          "li",
-          { className: "update" },
-          "Updates"
-        ),
-        React.createElement(
-          "li",
-          { className: "update" },
-          "Updates"
-        )
+        this.updates()
       )
     );
   }
